@@ -16,6 +16,7 @@ import { Subject } from "rxjs";
 export class AuthService {
   private _environmentVariablesRetrieved = new Subject();
   public onEnvironmentVariablesRetrieved$ = this._environmentVariablesRetrieved.asObservable();
+  private readonly w: any;
 
   constructor(
     private commonHttpService: CommonHttpService,
@@ -23,7 +24,8 @@ export class AuthService {
     @Inject(SESSION_STORAGE) private sessionStorage: StorageService,
     @Inject(LOCAL_STORAGE) private localStorage: StorageService,
     private sessionService: SessionService,
-  ) {}
+  ) {
+  }
 
   getTokenAuthServer() {
     return GlobalVariable.http.get(PathConstant.TOKEN_AUTH).pipe();
@@ -86,7 +88,20 @@ export class AuthService {
     if (GlobalVariable.isSUSESSO && !isNVTimeout && !isSSOTimeout)
       this.router.navigate(['login']);
     else {
-      this.doLogout(isNVTimeout);
+      GlobalVariable.http
+      .get(PathConstant.SAML_SLO_URL).subscribe(
+        (saml: any) => {
+          let redirect = saml.redirect;
+          if (redirect !== null ) {
+            this.doLogout(isNVTimeout, redirect.redirect_url);
+          } else {
+            this.doLogout(isNVTimeout, "");
+          }
+        },
+        error => {
+            this.doLogout(isNVTimeout, "");
+        }
+      )
     }
   }
 
@@ -132,7 +147,7 @@ export class AuthService {
     this._environmentVariablesRetrieved.next(true);
   }
 
-  private doLogout = (isNVTimeout: boolean) => {
+  private doLogout = (isNVTimeout: boolean, redirectUrl: string) => {
     GlobalVariable.http.delete(PathConstant.LOGIN_URL).subscribe(
       (response: any) => {
         setTimeout(() => {
@@ -147,7 +162,11 @@ export class AuthService {
             GlobalVariable.isFooterReady = false;
             this.localStorage.set('version', version);
             this.localStorage.set('_gpuEnabled', gpuEnabled);
-            this.router.navigate([GlobalConstant.PATH_LOGIN]);
+            if (redirectUrl !== "") {
+                window.location.href = redirectUrl;
+            } else {
+                this.router.navigate([GlobalConstant.PATH_LOGIN]);
+            }
           } else {
             this.rejectBack();
           }

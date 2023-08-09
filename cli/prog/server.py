@@ -159,11 +159,11 @@ def show_server_saml(data):
     arg = {"type": "saml"}
     servers = data.client.list("server", "server", **arg)
     for s in servers:
-        output.lift_fields(s, "saml", ("sso_url", "issuer", "enable", "default_role"))
+        output.lift_fields(s, "saml", ("sso_url", "issuer", "enable", "default_role", "slo_url"))
         _show_role_mapping_display_format(s, "saml")
 
     click.echo("Total SAML servers: %s" % len(servers))
-    columns = ("sso_url", "issuer", "enable", "default_role", RoleMapping)
+    columns = ("sso_url", "issuer", "enable", "default_role", RoleMapping, "slo_url")
     output.list(columns, servers)
 
 
@@ -199,9 +199,9 @@ def show_server_detail(data, name):
             RoleMapping)
         output.show(columns, server)
     elif server["server_type"] == "saml":
-        output.lift_fields(server, "saml", ("sso_url", "issuer", "enable", "default_role"))
+        output.lift_fields(server, "saml", ("sso_url", "issuer", "enable", "default_role", "slo_url"))
         _show_role_mapping_display_format(server, "saml")
-        columns = ("sso_url", "issuer", "enable", "default_role", RoleMapping)
+        columns = ("sso_url", "issuer", "enable", "default_role", RoleMapping, "slo_url")
         output.show(columns, server)
     elif server["server_type"] == "oidc":
         output.lift_fields(server, "oidc", (
