@@ -23,7 +23,7 @@ export class LogoutComponent implements OnInit {
     this.isSUSESSO = GlobalVariable.isSUSESSO;
     if (!this.isSUSESSO) {
       this.auth.logout(false, false);
-      this.router.navigate([GlobalConstant.PATH_LOGIN]);
+      //this.router.navigate([GlobalConstant.PATH_LOGIN]);
     }
   }
 
