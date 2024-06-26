@@ -52,8 +52,8 @@ object AuthTokenJsonProtocol extends DefaultJsonProtocol {
   implicit val samlTokenFormat: RootJsonFormat[SamlToken]             = jsonFormat3(SamlToken)
   implicit val samlResponseFormat: RootJsonFormat[SamlResponse]       = jsonFormat3(SamlResponse)
 
-  implicit val serverOIDCFormat: RootJsonFormat[ServerOIDC] = jsonFormat11(ServerOIDC)
-  implicit val openIdServerFormat: RootJsonFormat[OpenIdServer] = jsonFormat8(
+  implicit val serverOIDCFormat: RootJsonFormat[ServerOIDC] = jsonFormat12(ServerOIDC)
+  implicit val openIdServerFormat: RootJsonFormat[OpenIdServer] = jsonFormat9(
     OpenIdServer
   )
   implicit val openIdServerConfigFormat: RootJsonFormat[OpenIdServerConfig] = jsonFormat2(

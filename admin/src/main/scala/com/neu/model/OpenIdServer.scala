@@ -17,7 +17,8 @@ case class OpenIdServer(
   scopes: Option[Array[String]] = None,
   enable: Option[Boolean],
   default_role: Option[String],
-  group_mapped_roles: Option[Array[GroupMappedRole]]
+  group_mapped_roles: Option[Array[GroupMappedRole]],
+  use_proxy: Option[Boolean]
 )
 
 /**
@@ -43,7 +44,8 @@ case class ServerOIDC(
   scopes: Option[Array[String]] = None,
   enable: Option[Boolean],
   default_role: Option[String],
-  role_groups: Option[Map[String, Array[String]]]
+  role_groups: Option[Map[String, Array[String]]],
+  use_proxy: Option[Boolean]
 )
 
 /**
