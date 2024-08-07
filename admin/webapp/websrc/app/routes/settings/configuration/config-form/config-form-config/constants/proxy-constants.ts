@@ -19,7 +19,7 @@ export const HTTPProxyStatusField = {
 };
 
 export const HTTPProxyURLField = {
-  key: 'proxy.registry_http_proxy.url',
+  key: 'proxy.registry_http_proxy_cfg.url',
   type: FormlyComponents.ICON_INPUT,
   templateOptions: {
     label: 'setting.URL',
@@ -36,7 +36,7 @@ export const HTTPProxyURLField = {
 };
 
 export const HTTPProxyUsernameField = {
-  key: 'proxy.registry_http_proxy.username',
+  key: 'proxy.registry_http_proxy_cfg.username',
   type: FormlyComponents.ICON_INPUT,
   templateOptions: {
     label: 'setting.USERNAME',
@@ -49,7 +49,7 @@ export const HTTPProxyUsernameField = {
 };
 
 export const HTTPProxyPasswordField = {
-  key: 'proxy.registry_http_proxy.password',
+  key: 'proxy.registry_http_proxy_cfg.password',
   type: FormlyComponents.ICON_INPUT,
   templateOptions: {
     label: 'setting.PASSWORD',
@@ -82,7 +82,7 @@ export const HTTPSProxyStatusField = {
 };
 
 export const HTTPSProxyURLField = {
-  key: 'proxy.registry_https_proxy.url',
+  key: 'proxy.registry_https_proxy_cfg.url',
   type: FormlyComponents.ICON_INPUT,
   templateOptions: {
     label: 'setting.URL',
@@ -99,7 +99,7 @@ export const HTTPSProxyURLField = {
 };
 
 export const HTTPSProxyUsernameField = {
-  key: 'proxy.registry_https_proxy.username',
+  key: 'proxy.registry_https_proxy_cfg.username',
   type: FormlyComponents.ICON_INPUT,
   templateOptions: {
     label: 'setting.USERNAME',
@@ -112,7 +112,7 @@ export const HTTPSProxyUsernameField = {
 };
 
 export const HTTPSProxyPasswordField = {
-  key: 'proxy.registry_https_proxy.password',
+  key: 'proxy.registry_https_proxy_cfg.password',
   type: FormlyComponents.ICON_INPUT,
   templateOptions: {
     label: 'setting.PASSWORD',

@@ -84,9 +84,9 @@ export interface AuthConfig {
 }
 
 export interface ProxyConfig {
-  registry_http_proxy: Proxy;
+  registry_http_proxy_cfg: Proxy;
   registry_http_proxy_status: boolean;
-  registry_https_proxy: Proxy;
+  registry_https_proxy_cfg: Proxy;
   registry_https_proxy_status: boolean;
 }
 

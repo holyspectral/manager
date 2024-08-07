@@ -77,10 +77,10 @@ export class ConfigFormComponent implements OnInit {
 
   @Input() set config(val) {
     this._config = val;
-    if (this._config.proxy.registry_http_proxy.url) {
+    if (this._config.proxy.registry_http_proxy_cfg.url) {
       this.configOptions.formState.isCreated.httpProxy = true;
     }
-    if (this._config.proxy.registry_https_proxy.url) {
+    if (this._config.proxy.registry_https_proxy_cfg.url) {
       this.configOptions.formState.isCreated.httpsProxy = true;
     }
     if (this._config.misc.unused_group_aging) {
@@ -219,16 +219,16 @@ export class ConfigFormComponent implements OnInit {
           rancher_ep: base_config.auth.rancher_ep,
         },
         proxy_cfg: {
-          registry_http_proxy: base_config.proxy.registry_http_proxy.password
-            ? base_config.proxy.registry_http_proxy
-            : Object.assign({}, base_config.proxy.registry_http_proxy, {
+          registry_http_proxy_cfg: base_config.proxy.registry_http_proxy_cfg.password
+            ? base_config.proxy.registry_http_proxy_cfg
+            : Object.assign({}, base_config.proxy.registry_http_proxy_cfg, {
                 password: null,
               }),
           registry_http_proxy_status:
             base_config.proxy.registry_http_proxy_status,
-          registry_https_proxy: base_config.proxy.registry_https_proxy.password
-            ? base_config.proxy.registry_https_proxy
-            : Object.assign({}, base_config.proxy.registry_https_proxy, {
+          registry_https_proxy_cfg: base_config.proxy.registry_https_proxy_cfg.password
+            ? base_config.proxy.registry_https_proxy_cfg
+            : Object.assign({}, base_config.proxy.registry_https_proxy_cfg, {
                 password: null,
               }),
           registry_https_proxy_status:
