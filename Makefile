@@ -1,10 +1,14 @@
 .PHONY: jar
 
 STAGE_DIR = stage
-BASE_IMAGE_TAG = latest
+BASE_IMAGE_TAG = alpine
 BUILD_IMAGE_TAG = latest
 
-copy_mgr:
+tls_cert:
+	wget https://github.com/neuvector/manifests/raw/a7a69b63b7d27f880fbc3b7f0c58049f3928ab59/build/share/etc/neuvector/certs/ssl-cert.key -O ssl-cert.key
+	wget https://github.com/neuvector/manifests/raw/a7a69b63b7d27f880fbc3b7f0c58049f3928ab59/build/share/etc/neuvector/certs/ssl-cert.pem -O ssl-cert.pem
+
+copy_mgr: tls_cert
 	cp manager/licenses/* ${STAGE_DIR}/licenses/
 	cp manager/cli/cli ${STAGE_DIR}/usr/local/bin/
 	cp manager/cli/cli.py ${STAGE_DIR}/usr/local/bin/
@@ -12,10 +16,13 @@ copy_mgr:
 	cp manager/scripts/* ${STAGE_DIR}/usr/local/bin/
 	cp manager/java.security ${STAGE_DIR}/usr/lib/jvm/java-11-openjdk/lib/security/java.security
 	cp manager/admin/target/scala-2.11/admin-assembly-1.0.jar ${STAGE_DIR}/usr/local/bin/
+	cp ssl-cert.key ${STAGE_DIR}/etc/neuvector/certs
+	cp ssl-cert.pem ${STAGE_DIR}/etc/neuvector/certs
 
 stage_init:
 	rm -rf ${STAGE_DIR}; mkdir -p ${STAGE_DIR}
 	mkdir -p ${STAGE_DIR}/usr/local/bin/
+	mkdir -p ${STAGE_DIR}/etc/neuvector/certs
 	mkdir -p ${STAGE_DIR}/licenses/
 	mkdir -p ${STAGE_DIR}/usr/lib/jvm/java-11-openjdk/lib/security/
 
